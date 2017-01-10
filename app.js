@@ -25,23 +25,22 @@ log4js.configure({
 });
 var logger = log4js.getLogger("normal");
 
-// view engine setup
+// 渲染网页模版路径设置
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-//app.use(logger('dev'));
+app.use(favicon(path.join(__dirname, 'public/title.ico')));
 //配置日志
 app.use(log4js.connectLogger(logger, {level:log4js.levels.INFO}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+//设定静态文件目录
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
 app.use('/users', users);
-
+app.use('/',index);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
