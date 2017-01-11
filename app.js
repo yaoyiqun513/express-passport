@@ -25,6 +25,20 @@ log4js.configure({
 });
 var logger = log4js.getLogger("normal");
 
+//mongodb连接头文件
+var MongoClient = require('mongodb').MongoClient;
+var assert = require('assert');
+
+//连接地址
+var dburl = 'mongodb://localhost:27017/express-passport-db';
+
+//尝试连接数据库
+MongoClient.connect(dburl,function(err,db){
+  assert.equal(null,err);
+  console.log("数据库连接成功!");
+  db.close();
+});
+
 // 渲染网页模版路径设置
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
